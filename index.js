@@ -50,7 +50,7 @@ module.exports = function (opt) {
 
     if (main === embedded) {
       error('unable to embed file[' + main + '] into itself.');
-    } else if (embeddedMap[embedded]) {
+    } else if (embeddedMap[main] == embedded) {  // 这里的循环依赖判断有问题 逻辑应该由A B都引用C报错 改为 A B互相引用时报错
       var next = embeddedMap[embedded],
         msg = [embedded];
       while (next && next !== embedded) {
